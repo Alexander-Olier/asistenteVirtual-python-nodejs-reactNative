@@ -43,18 +43,23 @@ def run():
 
     buscar = unidecode.unidecode(dato) 
     print(dato)
-    
-    data = requests.get(f"http://localhost:4000/api/pregunta/prg/{buscar}")
-    print(data)
-
-    if data.status_code == 200 :
+    if dato:
+        data = requests.get(f"http://localhost:4000/api/pregunta/prg/{buscar}")
+        print(data)
         str_data = data.text
-        obje = json.dumps(str_data)
-        respuesta = obje.replace('respuesta','') 
-        habla('Respondiendo' + respuesta) 
+        print(str_data)
+
+        if str_data == '':
+           habla('la pregunta no existe')
+       
+        else:#acomodar a que cuando sea 404 entre aqui
+            str_data = data.text
+            obje = json.dumps(str_data)
+            respuesta = obje.replace('respuesta','') 
+            habla('Respondiendo' + respuesta) 
     else:
-        habla('no existe esa pregunta')
-
-
+        run()
+    
+    
 
 run()

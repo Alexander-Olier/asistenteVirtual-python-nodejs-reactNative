@@ -18,7 +18,7 @@ Datos.lista = function( result){
 }
 
 Datos.listaUno = function(id, result){
-    conexion.query(`SELECT * FROM pregunta WHERE id =`,id, function(err, res){
+        conexion.query(`SELECT * FROM pregunta WHERE id =`,id, function(err, res){
         if (err){
             console.log(err)
             result(null, err)
@@ -30,7 +30,7 @@ Datos.listaUno = function(id, result){
 }
 Datos.buscarPregunta = function(pregunta,result){
     conexion.query(`SELECT respuesta FROM pregunta WHERE pregunta ='${pregunta}'`, function(err, res){
-        if (err){
+        if (err == true){
             console.log(err)
             result(null, err)
         }else{
