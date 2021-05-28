@@ -3,8 +3,6 @@ from speech_recognition import Microphone, Recognizer, AudioFile, UnknownValueEr
 from playsound import playsound
 import pyttsx3
 import urllib.request
-import urllib.request as ur
-import urllib.parse as par
 import json 
 import  unidecode
 import requests
@@ -22,6 +20,7 @@ def habla(text):
 def escucha():
     try:
         dato=""
+        habla('Hola, soy tu asistente')
         print("Escuchando...")
         with sr.Microphone() as source:             
             r.adjust_for_ambient_noise(source)  
@@ -40,7 +39,7 @@ def escucha():
 def run():
     dato = escucha()
     dato = dato.lower()
-
+    
     buscar = unidecode.unidecode(dato) 
     print(dato)
     if dato:
@@ -50,7 +49,7 @@ def run():
         print(str_data)
 
         if str_data == '':
-           habla('la pregunta no existe')
+           habla('lo siento, no tengo una respuesta para tu pregunta')
        
         else:#acomodar a que cuando sea 404 entre aqui
             str_data = data.text
@@ -58,7 +57,7 @@ def run():
             respuesta = obje.replace('respuesta','') 
             habla('Respondiendo' + respuesta) 
     else:
-        run()
+        run() 
     
     
 
